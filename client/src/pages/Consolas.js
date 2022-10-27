@@ -39,7 +39,7 @@ const Consolas = () => {
         Agregar nueva consola
       </Typography>
       <AgregarNombres onSubmit={onSubmit} />
-      <ListaConsolas consolas={consolas} />
+      <ListaConsolas fetchConsolas={fetchConsolas} consolas={consolas} />
     </Container>
   );
 };

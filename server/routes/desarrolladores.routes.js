@@ -1,25 +1,25 @@
 const router = require("express").Router()
 const Videojuegos = require("../models/Videojuego")
-const Consola = require("../models/Consola")
+const Desarrollador = require("../models/Desarrollador")
 
 
 router.post("/", (req,res)=>{
-  Consola.create(req.body)
-  .then(consola => res.json(consola))
+  Desarrollador.create(req.body)
+  .then(desarrollador => res.json(desarrollador))
   .catch(err => res.status(422).json({ errors: err.errors }))
 
 })
 
 router.get("/", (req,res)=>{
-  Consola.find()
-  .then(consolas => res.json(consolas))
+  Desarrollador.find()
+  .then(desarrollador => res.json(desarrollador))
   .catch(err => res.status(422).json({ errors: err.errors }))
 })
 
 router.delete("/:id", (req,res)=>{
   const {id} = req.params;
-  Consola.findByIdAndDelete(id)
-    .then(consola => res.json(consola))
+  Desarrollador.findByIdAndDelete(id)
+    .then(desarrollador => res.json(desarrollador))
     .catch(err => res.status(422).json({ errors: err.errors }))
 })
 

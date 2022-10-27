@@ -19,6 +19,9 @@ app.use("/", videojuegos)
 const consolas = require("./routes/consolas.routes")
 app.use("/consolas", consolas)
 
+const desarrolladores = require("./routes/desarrolladores.routes")
+app.use("/desarrolladores", desarrolladores)
+
 
 
 

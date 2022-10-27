@@ -9,16 +9,17 @@ import {
 import React from "react";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import axios from "axios";
+import PersonIcon from '@mui/icons-material/Person';
 
 
-const ListaConsolas = (props) => {
-  const { consolas, fetchConsolas } = props;
+const ListaDesarrolladores = (props) => {
+  const { desarrolladores, fetchDesarrolladores } = props;
 
   const borrarConsola = (id)=> {
     axios
-      .delete(`http://localhost:5005/consolas/${id}`)
+      .delete(`http://localhost:5005/desarrolladores/${id}`)
       .then((response) => {
-        fetchConsolas()
+        fetchDesarrolladores()
       })
       .catch((err) => console.log(err));
   }
@@ -26,12 +27,12 @@ const ListaConsolas = (props) => {
   return (
     <Container>
       <List sx={{ width: "100%", mt: 3 }}>
-        {consolas.map((consola) => {
-          const { _id, nombre } = consola;
+        {desarrolladores.map((desarrollador) => {
+          const { _id, nombre } = desarrollador;
           return (
             <ListItem key={_id}>
               <ListItemAvatar>
-                <VideogameAssetIcon sx={{ color: "#651fff" }} />
+                <PersonIcon sx={{ color: "#651fff" }} />
               </ListItemAvatar>
               <ListItemText>{nombre}</ListItemText>
               <Button onClick={() => borrarConsola(_id)} color="error">X</Button>
@@ -43,4 +44,4 @@ const ListaConsolas = (props) => {
   );
 };
 
-export default ListaConsolas;
+export default ListaDesarrolladores;

@@ -9,6 +9,6 @@ const desarrolladorSchema = new Schema(
    }
   });
 
-const Desarrolador= model("Desarrolador", desarrolladorSchema);
+const Desarrollador= model("Desarrollador", desarrolladorSchema);
 
-module.exports = Desarrolador;
+module.exports = Desarrollador;
