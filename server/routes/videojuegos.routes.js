@@ -1,9 +1,28 @@
 const router = require("express").Router()
-const Videojuegos = require("../models/Videojuego")
+const Videojuego = require("../models/Videojuego")
 const Consola = require("../models/Consola")
 const Desarrolador = require("../models/Desarrollador")
 
 
+router.post("/", (req,res)=>{
+  Videojuego.create(req.body)
+  .then(videojuego => res.json(videojuego))
+  .catch(err => res.status(422).json({ errors: err.errors }))
+
+})
+
+router.get("/", (req,res)=>{
+  Videojuego.find()
+  .then(videojuego => res.json(videojuego))
+  .catch(err => res.status(422).json({ errors: err.errors }))
+})
+
+router.delete("/:id", (req,res)=>{
+  const {id} = req.params;
+  Videojuego.findByIdAndDelete(id)
+    .then(videojuego => res.json(videojuego))
+    .catch(err => res.status(422).json({ errors: err.errors }))
+})
 
 
 

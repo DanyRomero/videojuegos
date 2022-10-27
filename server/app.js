@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const videojuegos = require("./routes/videojuegos.routes")
-app.use("/", videojuegos)
+app.use("/videojuegos", videojuegos)
 
 const consolas = require("./routes/consolas.routes")
 app.use("/consolas", consolas)

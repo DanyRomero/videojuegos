@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Consolas from "./pages/Consolas";
 import Desarrolladores from "./pages/Desarrolladores";
 import Inicio from "./pages/Inicio";
+import Videojuegos from "./pages/Videojuegos";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/consolas" element={<Consolas />} />
         <Route path="/desarrolladores" element={<Desarrolladores />} />
+        <Route path="/videojuegos" element={<Videojuegos />} />
       </Routes>
     </Box>
   );
