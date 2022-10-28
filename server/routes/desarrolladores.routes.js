@@ -12,6 +12,7 @@ router.post("/", (req,res)=>{
 
 router.get("/", (req,res)=>{
   Desarrollador.find()
+  .sort("nombre")
   .then(desarrollador => res.json(desarrollador))
   .catch(err => res.status(422).json({ errors: err.errors }))
 })
