@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
-import GamesIcon from "@mui/icons-material/Games";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { Link } from "react-router-dom";
+import CloudinaryImage from "./CloudinaryImage";
 
 const ListaVideojuegos = (props) => {
   const {
@@ -67,13 +67,13 @@ const ListaVideojuegos = (props) => {
     <Container>
       <List sx={{ width: "100%" }}>
         {filtroVideojuegos?.map((videojuego) => {
-          const { _id, nombre, año, desarrollador } = videojuego;
+          const { _id, nombre, año, desarrollador, imagen } = videojuego;
           return (
             <Grid key={_id} container>
               <ListItem sx={{ color: "text.secondary" }}>
                 <Grid item sm={12} md={9} sx={{ flexGrow: 1, display: "flex" }}>
-                  <ListItemAvatar>
-                    <GamesIcon sx={{ color: "#651fff" }} />
+                  <ListItemAvatar sx={{width:"10px", mr:3}}>
+                    <CloudinaryImage id={imagen}/>
                   </ListItemAvatar>
                   <Link
                     to={`/videojuegos/${_id}`}

@@ -71,8 +71,7 @@ const FormularioVideojuego = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleCloudinaryUpload = (data) => {
-    console.log("Cloudinary Upload", data);
+  const onSuccess = (data) => {
     setImagen(data.public_id);
   };
 
@@ -155,7 +154,7 @@ const FormularioVideojuego = () => {
                   })}
                 </Select>
               </FormControl>
-              <CloudinaryUpload onSuccess={handleCloudinaryUpload} />
+              <CloudinaryUpload onSuccess={onSuccess} />
               {imagen && <Typography variant="body2" my={1} color="primary">Imagen cargada</Typography>}
               <TextField
                 required

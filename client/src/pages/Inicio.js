@@ -39,6 +39,7 @@ const Inicio = () => {
     setFiltroDesarrollador(e.target.value);
   };
   
+  console.log("videjoegos que hay", videojuegos)
 
   return (
     <Container>
