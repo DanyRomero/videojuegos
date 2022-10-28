@@ -1,20 +1,19 @@
 import {
-  Container,
   Button,
-  TextField,
-  Paper,
-  Select,
-  MenuItem,
+  Container,
   FormControl,
   InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-const FormularioVideojuego = () => {
- 
+const FormularioEditar = (props) => {
+  const {id} = props
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [desarrollador, setDesarrollador] = useState("");
@@ -24,7 +23,7 @@ const FormularioVideojuego = () => {
   const [consolasExistentes, setConsolasExistentes] = useState([]);
   const [imagen, setImagen] = useState("");
   const [activo, setActivo] = useState("");
- 
+  const [videojuego, setVideojuego] = useState({});
   const navigate = useNavigate();
 
   const fetchDesarrolladores = () => {
@@ -43,29 +42,51 @@ const FormularioVideojuego = () => {
         setConsolasExistentes(response.data);
       })
       .catch((error) => console.log(error));
+  };
+  const fetchVideojuego = () => {
+    axios
+      .get(`http://localhost:5005/videojuegos/${id}`)
+      .then((response) => {
+        console.log("juego pedido", response.data)
+        const{nombre, descripcion, desarrollador, año, consolas, imagen, activo}= response.data
+        setVideojuego(response.data);
+        setNombre(nombre)
+        setDescripcion(descripcion)
+        setDesarrollador("")
+        setAño(año)
+        setImagen(imagen)
+        setActivo(activo)
+      })
+      .catch((error) => console.log(error));
   }
 
-  
   useEffect(() => {
     fetchDesarrolladores();
     fetchConsolas();
-    
+    fetchVideojuego();
   }, []);
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios
-    .post(`http://localhost:5005/videojuegos`, {nombre, descripcion, desarrollador, año, consolas, imagen, activo})
-    .then((response) => {
-      navigate("/")
-    })
-    .catch((err) => console.log(err));
-
-  }
+      .put(`http://localhost:5005/videojuegos/${id}`, {
+        nombre,
+        descripcion,
+        desarrollador,
+        año,
+        consolas,
+        imagen,
+        activo,
+      })
+      .then((response) => {
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <Container sx={{marginBottom: "50px"}}>
-      <Paper sx={{ p: "15px", width:"60%"}} elevation={3}>
+    <Container sx={{ marginBottom: "50px" }}>
+      <Paper sx={{ p: "15px", width: "60%" }} elevation={3}>
         <form onSubmit={handleSubmit}>
           <TextField
             required
@@ -162,10 +183,10 @@ const FormularioVideojuego = () => {
           <Button
             type="submit"
             variant="contained"
+            sx={{ marginTop: "10px", width: "100%" }}
             color= "secondary"
-            sx={{ marginTop: "10px", width:"100%" }}
           >
-            Crear
+            Actualizar
           </Button>
         </form>
       </Paper>
@@ -173,4 +194,4 @@ const FormularioVideojuego = () => {
   );
 };
 
-export default FormularioVideojuego;
+export default FormularioEditar;

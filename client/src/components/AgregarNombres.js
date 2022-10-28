@@ -26,7 +26,8 @@ const AgregarNombres = (props) => {
         type="submit"
         variant="contained"
         size="small"
-        sx={{ bgcolor: "#651fff", marginLeft: "10px" }}
+        sx={{marginLeft: "10px" }}
+        color= "secondary"
       >
         Crear
       </Button>

@@ -24,7 +24,7 @@ export default function Navbar() {
           </Typography>
           <Button 
             component={Link} 
-            to="/videojuegos" 
+            to="/" 
             sx={{ color: "white" }}>
             Videojuegos
           </Button>
