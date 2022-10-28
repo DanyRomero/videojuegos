@@ -14,7 +14,7 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { Link } from "react-router-dom";
 
 const ListaVideojuegos = (props) => {
-  const { videojuegos, fetchVideojuegos, filtroNombre } = props;
+  const { videojuegos, fetchVideojuegos, filtroNombre, filtroAño, filtroDesarrollador } = props;
 
   const borrarVideojuego = (id) => {
     axios
@@ -27,16 +27,28 @@ const ListaVideojuegos = (props) => {
 
   let filtroVideojuegos = videojuegos;
   if (filtroNombre) {
-    filtroVideojuegos = videojuegos.filter((videojuego) =>
-    videojuego.nombre.toLowerCase().includes(filtroNombre.toLowerCase())
-  );
-}
+    filtroVideojuegos = filtroVideojuegos.filter((videojuego) =>
+      videojuego.nombre.toLowerCase().includes(filtroNombre.toLowerCase())
+    );
+  }
+  if (filtroDesarrollador) {
+    filtroVideojuegos = filtroVideojuegos.filter((videojuego) =>
+      videojuego.desarrollador.nombre.toLowerCase().includes(filtroDesarrollador.toLowerCase())
+    );
+  }
+  if (filtroAño) {
+    filtroVideojuegos = filtroVideojuegos.filter((videojuego) => videojuego.año === Number(filtroAño));
+  }
+
+  if (filtroVideojuegos.length === 0){
+    return <p>No se encontraron videojuegos</p>
+  }
 
   return (
     <Container>
       <List sx={{ width: "100%" }}>
         {filtroVideojuegos?.map((videojuego) => {
-          const { _id, nombre } = videojuego;
+          const { _id, nombre, año, desarrollador } = videojuego;
           return (
             <Grid key={_id} container>
               <ListItem sx={{ color: "text.secondary" }}>
@@ -49,10 +61,15 @@ const ListaVideojuegos = (props) => {
                   <ListItemAvatar>
                     <GamesIcon sx={{ color: "#651fff" }} />
                   </ListItemAvatar>
-                  <Link to={`/videojuegos/${_id}`} style={{textDecoration: "none"}}>
-                    <ListItemText sx={{color:"text.secondary"}}>
-                      {nombre}
-                    </ListItemText>
+                  <Link
+                    to={`/videojuegos/${_id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <ListItemText
+                      sx={{ color: "text.secondary" }}
+                      primary={nombre}
+                      secondary={`Año: ${año} · Desarrollador: ${desarrollador.nombre}`}
+                    />
                   </Link>
                 </Grid>
                 <Grid item sm={12} md={2}>

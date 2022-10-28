@@ -15,6 +15,7 @@ router.get("/", (req,res)=>{
   Videojuego.find()
   .populate("desarrollador")
   .populate("consolas")
+  .sort("nombre")
   .then(videojuego => res.json(videojuego))
   .catch(err => res.status(422).json({ errors: err.errors }))
 })

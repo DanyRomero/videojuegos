@@ -1,8 +1,8 @@
 import { Button, Container, Grid, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const BuscarNombre = (props) => {
-  const { filtradoNombre, filtroNombre } = props;
+const BuscarDesarrollador = (props) => {
+  const { filtradoDesarrollador, filtroDesarrollador } = props;
 
   return (
     <Container>
@@ -11,10 +11,10 @@ const BuscarNombre = (props) => {
           <Grid item xs>
             <TextField
               size="small"
-              label="Buscar por Nombre"
-              value={filtroNombre}
+              label="Buscar por Desarrollador"
+              value={filtroDesarrollador}
               fullWidth
-              onChange={filtradoNombre}
+              onChange={filtradoDesarrollador}
             />
           </Grid>
         </Grid>
@@ -23,4 +23,4 @@ const BuscarNombre = (props) => {
   );
 };
 
-export default BuscarNombre;
+export default BuscarDesarrollador;
