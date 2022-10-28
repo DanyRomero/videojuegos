@@ -59,6 +59,8 @@ const ListaVideojuegos = (props) => {
     filtroVideojuegos.sort((a, b) => a.nombre.localeCompare(b.nombre))
   } else if (orden === "año") {
     filtroVideojuegos.sort((a, b) => a.año - b.año)
+  } else if (orden === "desarrollador"){
+    filtroVideojuegos.sort((a,b)=>a.desarrollador.nombre.localeCompare(b.desarrollador.nombre))
   }
 
   return (
