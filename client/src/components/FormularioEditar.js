@@ -23,7 +23,6 @@ const FormularioEditar = (props) => {
   const [consolasExistentes, setConsolasExistentes] = useState([]);
   const [imagen, setImagen] = useState("");
   const [activo, setActivo] = useState("");
-  const [videojuego, setVideojuego] = useState({});
   const navigate = useNavigate();
 
   const fetchDesarrolladores = () => {
@@ -49,10 +48,11 @@ const FormularioEditar = (props) => {
       .then((response) => {
         console.log("juego pedido", response.data)
         const{nombre, descripcion, desarrollador, año, consolas, imagen, activo}= response.data
-        setVideojuego(response.data);
+       
         setNombre(nombre)
         setDescripcion(descripcion)
-        setDesarrollador("")
+        setDesarrollador(desarrollador._id)
+        setConsolas(consolas.map(consola => consola._id))
         setAño(año)
         setImagen(imagen)
         setActivo(activo)

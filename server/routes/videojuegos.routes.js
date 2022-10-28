@@ -13,6 +13,8 @@ router.post("/", (req,res)=>{
 
 router.get("/", (req,res)=>{
   Videojuego.find()
+  .populate("desarrollador")
+  .populate("consolas")
   .then(videojuego => res.json(videojuego))
   .catch(err => res.status(422).json({ errors: err.errors }))
 })

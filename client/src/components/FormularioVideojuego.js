@@ -68,6 +68,7 @@ const FormularioVideojuego = () => {
       <Paper sx={{ p: "15px", width:"60%"}} elevation={3}>
         <form onSubmit={handleSubmit}>
           <TextField
+            
             required
             margin="dense"
             label="Nombre"
