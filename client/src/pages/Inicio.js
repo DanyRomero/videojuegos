@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Button, Card, Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import ListaVideojuegos from "../components/ListaVideojuegos";
 
@@ -14,12 +7,14 @@ import { Link } from "react-router-dom";
 import BuscarNombre from "../components/BuscarNombre";
 import BuscarAño from "../components/BuscarAño";
 import BuscarDesarrollador from "../components/BuscarDesarrollador";
+import OrdenarPor from "../components/OrdenarPor";
 
 const Inicio = () => {
   const [videojuegos, setVideojuegos] = useState([]);
   const [filtroNombre, setFiltroNombre] = useState("");
   const [filtroAño, setFiltroAño] = useState("");
   const [filtroDesarrollador, setFiltroDesarrollador] = useState("");
+  const [orden, setOrden] = useState("nombre")
 
   const fetchVideojuegos = () => {
     axios
@@ -43,6 +38,7 @@ const Inicio = () => {
   const filtradoDesarrollador = (e) => {
     setFiltroDesarrollador(e.target.value);
   };
+  
 
   return (
     <Container>
@@ -71,13 +67,18 @@ const Inicio = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid container  spacing={3}>
+      <Grid container spacing={3}>
         <Grid item md={4}>
           <Typography my={4} variant="h6" color="text.secondary">
             <strong>Buscar por:</strong>
           </Typography>
           <Card
-            sx={{ minWidth: 275, marginTop: "25px", color: "text.secondary" }}
+            sx={{
+              minWidth: 275,
+              marginTop: "25px",
+              color: "text.secondary",
+              py: 4,
+            }}
           >
             <BuscarNombre
               filtradoNombre={filtradoNombre}
@@ -88,10 +89,11 @@ const Inicio = () => {
               filtroDesarrollador={filtroDesarrollador}
             />
             <BuscarAño filtradoAño={filtradoAño} filtroAño={filtroAño} />
+            <OrdenarPor setOrden={setOrden}/>
           </Card>
         </Grid>
         <Grid item md={8}>
-        <Typography my={4} variant="h6" color="text.secondary">
+          <Typography my={4} variant="h6" color="text.secondary">
             <strong>Listado</strong>
           </Typography>
           <Card
@@ -103,6 +105,7 @@ const Inicio = () => {
               filtroNombre={filtroNombre}
               filtroDesarrollador={filtroDesarrollador}
               filtroAño={filtroAño}
+              orden={orden}
             />
           </Card>
         </Grid>

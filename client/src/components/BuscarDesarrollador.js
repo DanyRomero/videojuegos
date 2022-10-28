@@ -1,12 +1,12 @@
-import { Button, Container, Grid, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Container, Grid, TextField } from "@mui/material";
+
 
 const BuscarDesarrollador = (props) => {
   const { filtradoDesarrollador, filtroDesarrollador } = props;
 
   return (
     <Container>
-      <form>
+      <form style={{paddingTop:"15px" }}>
         <Grid container>
           <Grid item xs>
             <TextField

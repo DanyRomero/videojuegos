@@ -1,5 +1,4 @@
-import { Button, Container, Grid, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Container, Grid, TextField } from "@mui/material";
 
 const BuscarNombre = (props) => {
   const { filtradoNombre, filtroNombre } = props;

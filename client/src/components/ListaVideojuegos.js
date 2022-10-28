@@ -14,7 +14,14 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { Link } from "react-router-dom";
 
 const ListaVideojuegos = (props) => {
-  const { videojuegos, fetchVideojuegos, filtroNombre, filtroAño, filtroDesarrollador } = props;
+  const {
+    videojuegos,
+    fetchVideojuegos,
+    filtroNombre,
+    filtroAño,
+    filtroDesarrollador,
+    orden
+  } = props;
 
   const borrarVideojuego = (id) => {
     axios
@@ -33,15 +40,25 @@ const ListaVideojuegos = (props) => {
   }
   if (filtroDesarrollador) {
     filtroVideojuegos = filtroVideojuegos.filter((videojuego) =>
-      videojuego.desarrollador.nombre.toLowerCase().includes(filtroDesarrollador.toLowerCase())
+      videojuego.desarrollador.nombre
+        .toLowerCase()
+        .includes(filtroDesarrollador.toLowerCase())
     );
   }
   if (filtroAño) {
-    filtroVideojuegos = filtroVideojuegos.filter((videojuego) => videojuego.año === Number(filtroAño));
+    filtroVideojuegos = filtroVideojuegos.filter(
+      (videojuego) => videojuego.año === Number(filtroAño)
+    );
   }
 
-  if (filtroVideojuegos.length === 0){
-    return <p>No se encontraron videojuegos</p>
+  if (filtroVideojuegos.length === 0) {
+    return <p>No se encontraron videojuegos</p>;
+  }
+
+  if (orden === "nombre") {
+    filtroVideojuegos.sort((a, b) => a.nombre.localeCompare(b.nombre))
+  } else if (orden === "año") {
+    filtroVideojuegos.sort((a, b) => a.año - b.año)
   }
 
   return (
@@ -52,12 +69,7 @@ const ListaVideojuegos = (props) => {
           return (
             <Grid key={_id} container>
               <ListItem sx={{ color: "text.secondary" }}>
-                <Grid
-                  item
-                  sm={12}
-                  md={10}
-                  sx={{ flexGrow: 1, display: "flex" }}
-                >
+                <Grid item sm={12} md={9} sx={{ flexGrow: 1, display: "flex" }}>
                   <ListItemAvatar>
                     <GamesIcon sx={{ color: "#651fff" }} />
                   </ListItemAvatar>
@@ -72,7 +84,7 @@ const ListaVideojuegos = (props) => {
                     />
                   </Link>
                 </Grid>
-                <Grid item sm={12} md={2}>
+                <Grid item sm={12} md={3}>
                   <Button onClick={() => borrarVideojuego(_id)} color="error">
                     X
                   </Button>
