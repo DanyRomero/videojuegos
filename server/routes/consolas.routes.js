@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/top", (req, res) => {
-  console.log("Agregados!");
   Videojuego.aggregate([
     { $unwind: { path: "$consolas" } },
     { $group: { _id: "$consolas", count: { $sum: 1 } } },
