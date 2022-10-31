@@ -38,8 +38,11 @@ router.get("/top", (req, res) => {
         },
       },
     },
+    {
+      $sort: { consolas: -1 }
+    },
   ])
-    .then((stats) => res.json(stats))
+    .then((consolas) => res.json(consolas))
     .catch((err) => {
       res.status(422).json({ errors: err.errors });
     });

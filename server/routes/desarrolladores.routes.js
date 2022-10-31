@@ -52,7 +52,9 @@ router.get("/top", (req, res) => {
     {
       $limit: 5,
     },
-  ]).then((results) => res.json(results));
+  ])
+    .then((desarrolladores) => res.json(desarrolladores))
+    .catch((err) => res.status(422).json({ errors: err.errors }));
 });
 
 router.delete("/:id", (req, res) => {
