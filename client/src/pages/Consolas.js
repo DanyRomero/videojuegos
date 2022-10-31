@@ -41,7 +41,7 @@ const Consolas = () => {
     fetchTopConsolas();
   }, []);
 
-  console.log("topconsolas", topConsolas)
+  
 
   return (
     <Container>
